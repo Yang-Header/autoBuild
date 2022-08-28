@@ -35,9 +35,9 @@ jobs:
             GITHUB_TOKEN: ${{ secrets.TOKEN }}
           with:
             upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./release.tgz
-          asset_name: release.tgz
-          asset_content_type: application/x-tgz
+            asset_path: ./release.tgz
+            asset_name: release.tgz
+            asset_content_type: application/x-tgz
       # 部署到服务器
         - name: Deploy
           uses: appleboy/ssh-action@master
@@ -46,9 +46,9 @@ jobs:
             username: ${{ secrets.USERNAME }}
             password: ${{ secrets.PASSWORD }}
             port: ${{ secrets.PORT }}
-          script: |
-            cd /root/realworld-nuxtjs
-            wget https://github.com/Yang-Header/autoBuild/releases/latest/download/release.tgz -O release.tgz
-            tar zxvf release.tgz
-            npm install --production
-            pm2 reload pm2.config.json
+            script: |
+              cd /root/realworld-nuxtjs
+              wget https://github.com/Yang-Header/autoBuild/releases/latest/download/release.tgz -O release.tgz
+              tar zxvf release.tgz
+              npm install --production
+              pm2 reload pm2.config.json
